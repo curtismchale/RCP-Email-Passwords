@@ -51,6 +51,47 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Makes sure that our filter is working for changing the subjects of emails
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testSubjectFilter(){
+
+		$user_args = $this->set_args();
+
+		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
+
+		add_filter( 'rcp_email_passwords_email_subject', array( $this, 'change_email_subject' ), 10, 6 );
+		$values = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		$subject = 'New subject with '. $id .'and' . $user_args['user_email'].'.';
+		$this->assertTrue( $values['subject'] == $subject );
+
+
+		remove_filter( 'rcp_email_passwords_email_subject', array( $this, 'change_email_subject' ), 10, 6 );
+
+	}
+
+	/**
+	 * Filters the subject so that we can test our subject filter
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 *
+	 * @param $message
+	 * @param $user_id
+	 * @param $user_args
+	 * @param $subscription_id
+	 * @param $status
+	 * @param $expiration
+	 * @return string
+	 */
+	function change_email_subject( $message, $user_id, $user_args, $subscription_id, $status, $expiration ){
+		return 'New subject with '. $user_id .'and' . $user_args['user_email'].'.';
+	}
+
+	/**
 	 * Setting our default args for our user array
 	 *
 	 * @since 1.0
