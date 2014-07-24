@@ -70,7 +70,9 @@ class RCP_CSV_Email_Pass{
 		$message .= 'username: '. esc_attr( $user_name ) .'<br />';
 		$message .= 'password: '. esc_attr( $password ) .'<br />';
 
-		wp_mail( $to, $subject, apply_filters( 'rcp_email_passwords_message', $message, $user_id, $user_args, $subscription_id, $status, $expiration ) );
+		$message = apply_filters( 'rcp_email_passwords_message', $message, $user_id, $user_args, $subscription_id, $status, $expiration );
+
+		wp_mail( $to, $subject, $message );
 
 		$return_value = array(
 			'to' => $to,
