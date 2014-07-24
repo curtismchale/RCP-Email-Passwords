@@ -19,6 +19,28 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$this->assertFalse( null == $this->plugin, 'testPluginActive says our plugin isn not loaded' );
 	}
 
+	function testPasswordEmail(){
+
+		$user_args = array(
+			'user_pass' => 'something',
+			'user_email' => 'bob@bob.com',
+			'user_login' => 'rocky',
+		);
+
+		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
+
+		$values = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		// test the user email
+		$this->assertTrue( $values['to'] === $user_args['user_email'] );
+
+		// test the subject
+		$subject = 'A new user account created for you at ' . $values['site'] . '.';
+		$this->assertTrue( $values['subject'] === $subject );
+
+
+	}
+
 	function tearDown(){
 		parent::tearDown();
 	}

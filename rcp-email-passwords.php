@@ -72,6 +72,15 @@ class RCP_CSV_Email_Pass{
 
 		wp_mail( $to, $subject, apply_filters( 'rcp_email_passwords_message', $message, $user_id, $user_args, $subscription_id, $status, $expiration ) );
 
+		$return_value = array(
+			'to' => $to,
+			'subject' => $subject,
+			'message' => $message,
+			'site' => site_url(),
+		);
+
+		return $return_value;
+
 	} // email_user_password
 
 	/**
