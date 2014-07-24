@@ -77,6 +77,7 @@ class RCP_CSV_Email_Pass{
 			'subject' => $subject,
 			'message' => $message,
 			'site' => site_url(),
+			'id' => $user_id,
 		);
 
 		return $return_value;

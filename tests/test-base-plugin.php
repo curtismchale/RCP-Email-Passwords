@@ -33,6 +33,8 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 
 		$values = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
 
+		$this->assertTrue( $values['id'] == $id );
+
 		// test the user email
 		$this->assertTrue( $values['to'] === $user_args['user_email'] );
 
