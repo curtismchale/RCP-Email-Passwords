@@ -55,6 +55,7 @@ class RCP_CSV_Email_Pass{
 	 * @uses esc_url()                                          Makes sure out data is safe
 	 * @uses esc_attr()                                         Escaping for safety
 	 * @uses wp_mail()                                          WP email function
+	 * @return array      $return_value                         Our arguements for testing purposes
 	 */
 	public function email_user_password( $user_id, $user_args, $subscription_id, $status, $expiration  ){
 
