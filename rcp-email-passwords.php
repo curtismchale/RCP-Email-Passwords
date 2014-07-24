@@ -138,4 +138,4 @@ class RCP_CSV_Email_Pass{
 
 } // RCP_CSV_Email_Pass
 
-new RCP_CSV_Email_Pass();
+$GLOBALS['rcp_email_passwords'] = new RCP_CSV_Email_Pass();
