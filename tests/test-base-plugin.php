@@ -27,11 +27,7 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	 */
 	function testPasswordEmail(){
 
-		$user_args = array(
-			'user_pass' => 'something',
-			'user_email' => 'bob@bob.com',
-			'user_login' => 'rocky',
-		);
+		$user_args = $this->set_args();
 
 		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
 
@@ -50,6 +46,25 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$message .= 'password: '. $user_args['user_pass'] .'<br />';
 		$this->assertTrue( $values['message'] == $message );
 
+	}
+
+	/**
+	 * Setting our default args for our user array
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 *
+	 * @return array
+	 */
+	function set_args(){
+
+		$user_args = array(
+			'user_pass' => 'something',
+			'user_email' => 'bob@bob.com',
+			'user_login' => 'rocky',
+		);
+
+		return $user_args;
 	}
 
 	function tearDown(){
