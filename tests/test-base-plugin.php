@@ -19,6 +19,12 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$this->assertFalse( null == $this->plugin, 'testPluginActive says our plugin isn not loaded' );
 	}
 
+	/**
+	 * This tests the default output of the password email
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
 	function testPasswordEmail(){
 
 		$user_args = array(
