@@ -38,6 +38,11 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$subject = 'A new user account created for you at ' . $values['site'] . '.';
 		$this->assertTrue( $values['subject'] === $subject );
 
+		// testing the mesage output
+		$message = $subject . '<br />';
+		$message .= 'username: '. $user_args['user_login'] .'<br />';
+		$message .= 'password: '. $user_args['user_pass'] .'<br />';
+		$this->assertTrue( $values['message'] == $message );
 
 	}
 
