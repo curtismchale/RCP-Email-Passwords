@@ -96,6 +96,48 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Tests to make sure that the deactivation routines are fired if we don't have our base plugins
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testPluginDeactivate(){
+
+		ob_start();
+		$this->plugin->check_required_plugins();
+		$s = ob_get_contents();
+		ob_clean();
+
+		$expected_output = $this->expected_output();
+
+		// have to pass them through the same formatting to match against
+		$s = preg_replace( '/\s+/', '', $s );
+		$expected_output = preg_replace( '/\s+/', '', $expected_output );
+
+		$this->assertTrue( $s === $expected_output );
+	}
+
+	/**
+	 * Our expected HTML output when we check for plugin activation
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 *
+	 * @return string
+	 */
+	function expected_output(){
+
+		$html = '<div id="message" class="error">';
+				$html .= '<p>RCP Password Email expects Restrict Content Pro to be active. This plugin has been deactivated.</p>';
+		$html .= '</div>';
+
+		$html .= '<div id="message" class="error">';
+				$html .= '<p>RCP Password Email expects Restrict Content Pro CSV User Import to be active. This plugin has been deactivated.</p>';
+		$html .= '</div>';
+
+		return $html;
+	}
+	/**
 	 * Changes the email message the user gets
 	 *
 	 * @since 1.0
