@@ -74,6 +74,46 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Tests the message filter in the plugin
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testMessageFilter(){
+
+		$user_args = $this->set_args();
+
+		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
+
+		add_filter( 'rcp_email_passwords_message', array( $this, 'change_email_message' ), 10, 6 );
+		$values = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		$message = 'Hey you have a username '.$user_args['user_login'] . 'and password'. $user_args['user_pass'].' now.';
+		$this->assertTrue( $values['message'] == $message );
+
+
+		remove_filter( 'rcp_email_passwords_message', array( $this, 'change_email_message' ), 10, 6 );
+	}
+
+	/**
+	 * Changes the email message the user gets
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 *
+	 * @param $message
+	 * @param $user_id
+	 * @param $user_args
+	 * @param $subscription_id
+	 * @param $status
+	 * @param $expiration
+	 * @return string
+	 */
+	function change_email_message( $message, $user_id, $user_args, $subscription_id, $status, $expiration ){
+		return 'Hey you have a username '.$user_args['user_login'] . 'and password'. $user_args['user_pass'].' now.';
+	}
+
+	/**
 	 * Filters the subject so that we can test our subject filter
 	 *
 	 * @since 1.0
