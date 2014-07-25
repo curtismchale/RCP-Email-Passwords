@@ -128,9 +128,26 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$user_args = $this->set_args();
 
 		$output = $this->plugin->email_user_password( 'string', $user_args, '', '', '' );
-		echo $output;
 
 		$this->assertTrue( false === $output, 'You did not have a user_id passed' );
+	}
+
+	/**
+	 * Tests to make sure that we catch no email case
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testNoEmail(){
+
+		$user_args = $this->set_args();
+		unset( $user_args['user_email'] );
+		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
+
+		$output = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		$this->assertTrue( false === $output, 'We did not deal with a blank email' );
+
 	}
 
 	/**

@@ -97,6 +97,10 @@ class RCP_CSV_Email_Pass{
 			return false;
 		}
 
+		if ( ! isset( $user_args['user_email'] ) || empty( $user_args['user_email'] ) ){
+			return false;
+		}
+
 	}
 
 	/**
