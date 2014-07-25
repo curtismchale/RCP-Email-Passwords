@@ -117,6 +117,12 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$this->assertTrue( $s === $expected_output );
 	}
 
+	/**
+	 * Making sure we handle if there is no user_id passed
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
 	function testNoUserID(){
 
 		$user_args = $this->set_args();
