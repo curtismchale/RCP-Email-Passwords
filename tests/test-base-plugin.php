@@ -187,6 +187,23 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Tests to make sure that we deal with a not valid user_id
+	 *
+	 * @since 1.1
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testValidUserID(){
+
+		$user_args = $this->set_args();
+		$id = rand( '50000', '100000');
+
+		$output = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		$this->assertTrue( false === $output, 'We did not deal with user_id that is not a valid user' );
+
+	}
+
+	/**
 	 * Our expected HTML output when we check for plugin activation
 	 *
 	 * @since 1.0

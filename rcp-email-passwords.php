@@ -64,6 +64,10 @@ class RCP_CSV_Email_Pass{
 			return false;
 		}
 
+		if ( false === $this->validate_user( $user_id, $user_args ) ) {
+			return false;
+		}
+
 		$to = $user_args['user_email'];
 
 		$site    = site_url();
@@ -91,6 +95,14 @@ class RCP_CSV_Email_Pass{
 		return $return_value;
 
 	} // email_user_password
+
+	private function validate_user( $user_id, $user_args ){
+
+		if ( false === get_user_by( 'id', $user_id ) ){
+			return false;
+		}
+
+	}
 
 	/**
 	 * Does basic content validation
