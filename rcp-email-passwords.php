@@ -51,6 +51,7 @@ class RCP_CSV_Email_Pass{
 	 * @param int       $subscription_id        required        ID of the subscription for the user
 	 * @param string    $status                 required        The status of the subscription
 	 * @param int       $expiration             required        Expiration date of the subscription
+	 * @uses $this->validate_required_data()                    Validates we have the data we expect
 	 * @uses site_url()                                         Returns URL for the site
 	 * @uses esc_url()                                          Makes sure out data is safe
 	 * @uses esc_attr()                                         Escaping for safety
@@ -91,6 +92,17 @@ class RCP_CSV_Email_Pass{
 
 	} // email_user_password
 
+	/**
+	 * Does basic content validation
+	 *
+	 * @since 1.1
+	 * @author SFNdesign, Curtis McHale
+	 * @access private
+	 *
+	 * @param int       $user_id        required            The User_ID that we are checking
+	 * @param array     $user_args      required            Array of user args we are checking
+	 * @return bool                                         False if we have a data issue
+	 */
 	private function validate_required_data( $user_id, $user_args ){
 
 		// makes sure we got a valid integer for a user_id
