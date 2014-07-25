@@ -169,6 +169,24 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Makes sure we test for something in the user_login
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testNoLoginName(){
+
+		$user_args = $this->set_args();
+		unset( $user_args['user_login'] );
+		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
+
+		$output = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		$this->assertTrue( false === $output, 'We did not deal with a blank login name' );
+
+	}
+
+	/**
 	 * Our expected HTML output when we check for plugin activation
 	 *
 	 * @since 1.0

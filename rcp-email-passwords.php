@@ -93,15 +93,23 @@ class RCP_CSV_Email_Pass{
 
 	private function validate_required_data( $user_id, $user_args ){
 
+		// makes sure we got a valid integer for a user_id
 		if ( ! isset( $user_id ) || ! is_int( $user_id ) ){
 			return false;
 		}
 
+		// makes sure we got something for an email
 		if ( ! isset( $user_args['user_email'] ) || empty( $user_args['user_email'] ) ){
 			return false;
 		}
 
+		// makes sure we got an email that is a valid email
 		if ( ! is_email( $user_args['user_email'] ) ){
+			return false;
+		}
+
+		// make sure we got a user login
+		if ( ! isset( $user_args['user_login'] ) || empty( $user_args['user_login'] ) ){
 			return false;
 		}
 
