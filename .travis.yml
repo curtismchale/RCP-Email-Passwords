@@ -38,5 +38,3 @@ before_script:
 script:
     - mkdir -p build/logs
     - phpunit -c phpunit.xml
-
-script: phpunit
