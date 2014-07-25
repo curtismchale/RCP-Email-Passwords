@@ -151,6 +151,24 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Makes sure we deal with bad data in the email field
+	 *
+	 * @since 1.0
+	 * @author SFNdesign, Curtis McHale
+	 */
+	function testBadEmail(){
+
+		$user_args = $this->set_args();
+		$user_args['user_email'] = 'string';
+		$id = $this->factory->user->create( array( 'role' => 'subscriber' ) );
+
+		$output = $this->plugin->email_user_password( $id, $user_args, '', '', '' );
+
+		$this->assertTrue( false === $output, 'We did not detect a string that is not an email' );
+
+	}
+
+	/**
 	 * Our expected HTML output when we check for plugin activation
 	 *
 	 * @since 1.0

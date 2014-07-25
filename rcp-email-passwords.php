@@ -101,6 +101,10 @@ class RCP_CSV_Email_Pass{
 			return false;
 		}
 
+		if ( ! is_email( $user_args['user_email'] ) ){
+			return false;
+		}
+
 	}
 
 	/**
