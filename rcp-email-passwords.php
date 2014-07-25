@@ -59,6 +59,10 @@ class RCP_CSV_Email_Pass{
 	 */
 	public function email_user_password( $user_id, $user_args, $subscription_id, $status, $expiration  ){
 
+		if ( false === $this->validate_required_data( $user_id, $user_args ) ) {
+			return false;
+		}
+
 		$to = $user_args['user_email'];
 
 		$site    = site_url();
@@ -86,6 +90,14 @@ class RCP_CSV_Email_Pass{
 		return $return_value;
 
 	} // email_user_password
+
+	private function validate_required_data( $user_id, $user_args ){
+
+		if ( ! isset( $user_id ) || ! is_int( $user_id ) ){
+			return false;
+		}
+
+	}
 
 	/**
 	 * Checks for WooCommerce and GF and kills our plugin if they aren't both active

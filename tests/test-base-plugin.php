@@ -117,6 +117,16 @@ class TestBaseRCPEmailPasswords extends WP_UnitTestCase {
 		$this->assertTrue( $s === $expected_output );
 	}
 
+	function testNoUserID(){
+
+		$user_args = $this->set_args();
+
+		$output = $this->plugin->email_user_password( 'string', $user_args, '', '', '' );
+		echo $output;
+
+		$this->assertTrue( false === $output, 'You did not have a user_id passed' );
+	}
+
 	/**
 	 * Our expected HTML output when we check for plugin activation
 	 *
