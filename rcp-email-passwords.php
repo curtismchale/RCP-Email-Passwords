@@ -96,6 +96,17 @@ class RCP_CSV_Email_Pass{
 
 	} // email_user_password
 
+	/**
+	 * Checks to make sure we have a valid user
+	 *
+	 * @since 1.1
+	 * @author SFNdesign, Curtis McHale
+	 * @access private
+	 *
+	 * @param int       $user_id            required            User_ID we are testing
+	 * @param array     $user_args          required            User_args we are testing
+	 * @return bool                                             False if not a valid user
+	 */
 	private function validate_user( $user_id, $user_args ){
 
 		if ( false === get_user_by( 'id', $user_id ) ){
